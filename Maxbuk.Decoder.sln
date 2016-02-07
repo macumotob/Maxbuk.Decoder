@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2013 for Windows Desktop
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maxbuk.Decoder", "Maxbuk.Decoder.csproj", "{23D34978-5B0F-4EED-A802-AE53E7F063B7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "maxbukcnv", "maxbukcnv\maxbukcnv.csproj", "{71A99315-0D02-475B-BB86-DCB3E398258A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{23D34978-5B0F-4EED-A802-AE53E7F063B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23D34978-5B0F-4EED-A802-AE53E7F063B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23D34978-5B0F-4EED-A802-AE53E7F063B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23D34978-5B0F-4EED-A802-AE53E7F063B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71A99315-0D02-475B-BB86-DCB3E398258A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71A99315-0D02-475B-BB86-DCB3E398258A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71A99315-0D02-475B-BB86-DCB3E398258A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71A99315-0D02-475B-BB86-DCB3E398258A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
