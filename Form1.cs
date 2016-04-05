@@ -189,7 +189,7 @@ namespace Maxbuk.Decoder
 
       label_next_name:
 
-      name = "_" + name;
+      //name = "_" + name;
       string newFileName = folder + name;
       if(System.IO.File.Exists(newFileName))
       {
@@ -210,11 +210,22 @@ namespace Maxbuk.Decoder
       string name = _textNewFileName.Text;
       name = name.Replace('\r', '_');
       name = name.Replace('\n', '_');
-      name = name.Replace(' ', '_');
+      //name = name.Replace(' ', '_');
       _textNewFileName.Text = name;
       name = System.IO.Path.GetDirectoryName(_currentFileName) + "/" + name;
       try
       {
+        
+        if (_textConverted.Text.IndexOf("encoding=\"windows-1251\"") != -1)
+        { // encoding="windows-1251"
+          _textConverted.Text = _textConverted.Text.Replace("encoding=\"windows-1251\"", "encoding=\"utf-8\"");
+        }
+        if (_textConverted.Text.IndexOf("encoding=\"windows-1252\"") != -1)
+        { // encoding="windows-1251"
+          _textConverted.Text = _textConverted.Text.Replace("encoding=\"windows-1252\"", "encoding=\"utf-8\"");
+        }
+        //_textConverted.Text = _textConverted.Text.Replace("ï¿½", "?");
+        //ï¿½
         System.IO.File.WriteAllText(name, _textConverted.Text, _targetCodePage);
         MessageBox.Show(this, "saved as " + name, "Info", MessageBoxButtons.OK);
       }
