@@ -25,17 +25,17 @@ namespace Maxbuk.Decoder
     public Form1()
     {
       InitializeComponent();
-      _textConverted.KeyPress += _textConverted_KeyPress;
+      //_textConverted.KeyPress += _textConverted_KeyPress;
       _createListColumns();
 
       _loadEncodings();
       _load_files();
     }
 
-    private void _textConverted_KeyPress(object sender, KeyPressEventArgs e)
-    {
+    //private void _textConverted_KeyPress(object sender, KeyPressEventArgs e)
+    //{
       
-    }
+    //}
 
     protected override bool IsInputChar(char charCode)
     {
@@ -100,40 +100,32 @@ namespace Maxbuk.Decoder
 
         _tabControl.SelectedIndex = 0;
         _loadFileWithEncoding(_selectedCodePage);
-        _convertFileContent();
+        _convert_file_content();
       }
     }
+    private void _set_selected_encoding(Encoding encoding)
+    {
+      if (_encodingMode == MaxbukEncodingMode.Original)
+      {
+        _selectedCodePage = encoding;
+        _labelEncoding.Text = _selectedCodePage.EncodingName;
+        _loadFileWithEncoding(_selectedCodePage);
+      }
+      else
+      {
+        _targetCodePage = encoding;
+      }
 
+    }
     void _listEncodings_Click(object sender, EventArgs e)
     {
       _labelFileName.Text = _currentFileName;
       if (_listEncodings.SelectedItems != null && _listEncodings.SelectedItems.Count == 1)
       {
-        if (_encodingMode == MaxbukEncodingMode.Original)
-        {
-          _selectedCodePage = (Encoding)_listEncodings.SelectedItems[0].Tag;
-          _labelEncoding.Text = _selectedCodePage.EncodingName;
-          _loadFileWithEncoding(_selectedCodePage);
-        }
-        else
-        {
-          _targetCodePage = (Encoding)_listEncodings.SelectedItems[0].Tag;
-        }
-        _convertFileContent();
+        _set_selected_encoding((Encoding)_listEncodings.SelectedItems[0].Tag);
+        _convert_file_content();
       }
     }
-    //private void _loadDefaultFile()
-    //{
-    //  if (System.IO.File.Exists(_currentFileName))
-    //  {
-    //    _labelFileName.Text = _currentFileName;
-    //    this.Cursor = Cursors.WaitCursor;
-    //    _textFileContent.SuspendLayout();
-    //    _textFileContent.Text = System.IO.File.ReadAllText(_currentFileName);
-    //    _textFileContent.ResumeLayout();
-    //    this.Cursor = Cursors.Default;
-    //  }
-    //}
     private void _loadFileWithEncoding(Encoding encoding)
     {
       if (System.IO.File.Exists(_currentFileName))
@@ -168,7 +160,7 @@ namespace Maxbuk.Decoder
       }
       _listEncodings.Select();
     }
-    private void _convertFileContent()
+    private void _convert_file_content()
     {
       this.Cursor = Cursors.WaitCursor;
       byte[] bytes = _selectedCodePage.GetBytes(_textFileContent.Text);
@@ -215,17 +207,15 @@ namespace Maxbuk.Decoder
       name = System.IO.Path.GetDirectoryName(_currentFileName) + "/" + name;
       try
       {
-        
-        if (_textConverted.Text.IndexOf("encoding=\"windows-1251\"") != -1)
-        { // encoding="windows-1251"
-          _textConverted.Text = _textConverted.Text.Replace("encoding=\"windows-1251\"", "encoding=\"utf-8\"");
+
+        string[] cps = { "encoding=\"windows-1251\"", "encoding=\"windows-1252\"", "encoding=\"Windows-1252\"", "encoding=\"Windows-1251\"" };
+        foreach(var cp in cps)
+        {
+          if (_textConverted.Text.IndexOf(cp) != -1)
+          { // encoding="windows-1251"
+            _textConverted.Text = _textConverted.Text.Replace(cp, "encoding=\"utf-8\"");
+          }
         }
-        if (_textConverted.Text.IndexOf("encoding=\"windows-1252\"") != -1)
-        { // encoding="windows-1251"
-          _textConverted.Text = _textConverted.Text.Replace("encoding=\"windows-1252\"", "encoding=\"utf-8\"");
-        }
-        //_textConverted.Text = _textConverted.Text.Replace("ï¿½", "?");
-        //ï¿½
         System.IO.File.WriteAllText(name, _textConverted.Text, _targetCodePage);
         MessageBox.Show(this, "saved as " + name, "Info", MessageBoxButtons.OK);
       }
@@ -299,6 +289,18 @@ namespace Maxbuk.Decoder
     {
       TextFormater formater = new TextFormater();
       _textConverted.Text = formater.FormatText(_textConverted.Text);
+    }
+
+    private void bntKoi8r_Click(object sender, EventArgs e)
+    {
+      _set_selected_encoding(Encoding.GetEncoding(1251));
+      _convert_file_content();
+    }
+
+    private void btnUtf8_Click(object sender, EventArgs e)
+    {
+      _set_selected_encoding(Encoding.GetEncoding("utf-8"));
+      _convert_file_content();
     }
   }//
 }

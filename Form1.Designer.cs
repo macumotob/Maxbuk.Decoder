@@ -47,6 +47,8 @@
       this._textConverted = new System.Windows.Forms.TextBox();
       this._labelEncoding = new System.Windows.Forms.Label();
       this._listEncodings = new System.Windows.Forms.ListView();
+      this.bntKoi8r = new System.Windows.Forms.Button();
+      this.btnUtf8 = new System.Windows.Forms.Button();
       ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
       this.splitContainer1.Panel1.SuspendLayout();
       this.splitContainer1.Panel2.SuspendLayout();
@@ -79,6 +81,8 @@
       // 
       // splitContainer1.Panel2
       // 
+      this.splitContainer1.Panel2.Controls.Add(this.btnUtf8);
+      this.splitContainer1.Panel2.Controls.Add(this.bntKoi8r);
       this.splitContainer1.Panel2.Controls.Add(this._listEncodings);
       this.splitContainer1.Size = new System.Drawing.Size(1023, 488);
       this.splitContainer1.SplitterDistance = 658;
@@ -280,15 +284,38 @@
       // 
       // _listEncodings
       // 
-      this._listEncodings.Dock = System.Windows.Forms.DockStyle.Fill;
+      this._listEncodings.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this._listEncodings.BorderStyle = System.Windows.Forms.BorderStyle.None;
       this._listEncodings.FullRowSelect = true;
       this._listEncodings.GridLines = true;
       this._listEncodings.HideSelection = false;
-      this._listEncodings.Location = new System.Drawing.Point(0, 0);
+      this._listEncodings.Location = new System.Drawing.Point(0, 44);
       this._listEncodings.Name = "_listEncodings";
-      this._listEncodings.Size = new System.Drawing.Size(361, 488);
+      this._listEncodings.Size = new System.Drawing.Size(361, 444);
       this._listEncodings.TabIndex = 0;
       this._listEncodings.UseCompatibleStateImageBehavior = false;
+      // 
+      // bntKoi8r
+      // 
+      this.bntKoi8r.Location = new System.Drawing.Point(14, 9);
+      this.bntKoi8r.Name = "bntKoi8r";
+      this.bntKoi8r.Size = new System.Drawing.Size(90, 29);
+      this.bntKoi8r.TabIndex = 1;
+      this.bntKoi8r.Text = "KOI8-R";
+      this.bntKoi8r.UseVisualStyleBackColor = true;
+      this.bntKoi8r.Click += new System.EventHandler(this.bntKoi8r_Click);
+      // 
+      // btnUtf8
+      // 
+      this.btnUtf8.Location = new System.Drawing.Point(119, 9);
+      this.btnUtf8.Name = "btnUtf8";
+      this.btnUtf8.Size = new System.Drawing.Size(90, 29);
+      this.btnUtf8.TabIndex = 2;
+      this.btnUtf8.Text = "UTF-8";
+      this.btnUtf8.UseVisualStyleBackColor = true;
+      this.btnUtf8.Click += new System.EventHandler(this.btnUtf8_Click);
       // 
       // Form1
       // 
@@ -340,7 +367,8 @@
     private System.Windows.Forms.Button _buttonSelectFolder;
     private System.Windows.Forms.Label _labelNewFileName;
     private System.Windows.Forms.Button _buttonFormat;
-
+    private System.Windows.Forms.Button bntKoi8r;
+    private System.Windows.Forms.Button btnUtf8;
   }
 }
 
